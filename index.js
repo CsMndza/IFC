@@ -1,16 +1,19 @@
-// index.js
-const express = require("express");
+const express = require('express');
+const db = require('./src/Database/db'); 
+
 const app = express();
 
+const clientesRoutes = require('./src/Routes/clientes');
+
+
 app.get("/", (req, res) => {
-  res.send("¡Hola desde Express!");
+  res.send("¡Hola Mundo con conexión a BD!");
 });
 
-app.get("/josu", (req, res) => {
-  res.send("¡Hola josu!");
-});
+app.use("/clientes", clientesRoutes);
 
 
-app.listen(3000, () => {
-  console.log("Servidor en http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
